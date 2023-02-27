@@ -21,6 +21,7 @@ namespace Quest
                 "What is the current second?", DateTime.Now.Second, 50);
 
             int randomNumber = new Random().Next() % 10;
+
             Challenge guessRandom = new Challenge("What number am I thinking of?", randomNumber, 25);
 
             Challenge favoriteBeatle = new Challenge(
@@ -30,7 +31,7 @@ namespace Quest
     3) George
     4) Ringo
 ",
-                4, 20
+                3, 20
             );
 
             // "Awesomeness" is like our Adventurer's current "score"
@@ -43,7 +44,9 @@ namespace Quest
             int maxAwesomeness = 100;
 
             // Make a new "Adventurer" object using the "Adventurer" class
-            Adventurer theAdventurer = new Adventurer("Jack");
+            Console.WriteLine("What is your dumb name, Adventurer?: ");
+            string userName = Console.ReadLine();
+            Adventurer theAdventurer = new Adventurer(userName);
 
             // A list of challenges for the Adventurer to complete
             // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
