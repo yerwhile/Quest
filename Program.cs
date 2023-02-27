@@ -34,6 +34,15 @@ namespace Quest
                 3, 20
             );
 
+            // New "Robe" instance
+            Robe tricolor = new Robe() {
+                Colors = new List<string>()
+                    {
+                        "blue", "red", "yellow"
+                    },
+                Length = 42
+            };
+
             // "Awesomeness" is like our Adventurer's current "score"
             // A higher Awesomeness is better
 
@@ -46,7 +55,10 @@ namespace Quest
             // Make a new "Adventurer" object using the "Adventurer" class
             Console.WriteLine("What is your dumb name, Adventurer?: ");
             string userName = Console.ReadLine();
-            Adventurer theAdventurer = new Adventurer(userName);
+            Adventurer theAdventurer = new Adventurer(userName, tricolor);
+
+            string descript = theAdventurer.GetDescription();
+            Console.WriteLine(descript);
 
             // A list of challenges for the Adventurer to complete
             // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
