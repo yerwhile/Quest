@@ -43,6 +43,11 @@ namespace Quest
                 Length = 42
             };
 
+            Hat AdventureHat = new Hat
+                {
+                    ShininessLevel = 6
+                };
+
             // "Awesomeness" is like our Adventurer's current "score"
             // A higher Awesomeness is better
 
@@ -55,7 +60,7 @@ namespace Quest
             // Make a new "Adventurer" object using the "Adventurer" class
             Console.WriteLine("What is your dumb name, Adventurer?: ");
             string userName = Console.ReadLine();
-            Adventurer theAdventurer = new Adventurer(userName, tricolor);
+            Adventurer theAdventurer = new Adventurer(userName, tricolor, AdventureHat);
 
             string descript = theAdventurer.GetDescription();
             Console.WriteLine(descript);
