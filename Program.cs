@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Every class in the program is defined within the "Quest" namespace
 // Classes within the same namespace refer to one another without a "using" statement
@@ -23,6 +24,10 @@ namespace Quest
             int randomNumber = new Random().Next() % 10;
 
             Challenge guessRandom = new Challenge("What number am I thinking of?", randomNumber, 25);
+
+            Challenge currentYear = new Challenge("What year is it, genius?", 2023, 15);
+
+            Challenge valsVacation = new Challenge("How many times did Val go to Japan?", 0, 20);
 
             Challenge favoriteBeatle = new Challenge(
                 @"Who's your favorite Beatle?
@@ -75,13 +80,20 @@ namespace Quest
                 theAnswer,
                 whatSecond,
                 guessRandom,
-                favoriteBeatle
+                favoriteBeatle,
+                currentYear,
+                valsVacation
             };
 
             // Loop through all the challenges and subject the Adventurer to them
-            foreach (Challenge challenge in challenges)
+            // foreach (Challenge challenge in challenges)
+            // {
+            //     challenge.RunChallenge(theAdventurer);
+            // }
+            Random randomIndex = new Random();
+            foreach(int i in Enumerable.Range(0, 5).OrderBy(x => randomIndex.Next()))
             {
-                challenge.RunChallenge(theAdventurer);
+                challenges[i].RunChallenge(theAdventurer);
             }
 
             // This code examines how Awesome the Adventurer is after completing the challenges
