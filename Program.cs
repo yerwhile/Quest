@@ -18,7 +18,7 @@ namespace Quest
             Challenge theAnswer = new Challenge(
                 "What's the answer to life, the universe and everything?", 42, 25);
             Challenge whatSecond = new Challenge(
-                "What is the current second?", DateTime.Now.Second, 50);
+                "What is the current second?", 1, 50);
 
             int randomNumber = new Random().Next() % 10;
 
@@ -47,6 +47,8 @@ namespace Quest
                 {
                     ShininessLevel = 6
                 };
+
+            Prize AdventurePrize = new Prize("a big honkin' hamburger");
 
             // "Awesomeness" is like our Adventurer's current "score"
             // A higher Awesomeness is better
@@ -96,6 +98,8 @@ namespace Quest
             {
                 Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
             }
+
+            Console.Write(AdventurePrize.ShowPrize(theAdventurer));
 
             Console.WriteLine("Hey dummy, would you like to play again? (Y/N): ");
             string againAnswer = Console.ReadLine().ToLower();
