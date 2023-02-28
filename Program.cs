@@ -69,61 +69,82 @@ namespace Quest
             string userName = Console.ReadLine();
             Adventurer theAdventurer = new Adventurer(userName, tricolor, AdventureHat);
 
-            string descript = theAdventurer.GetDescription();
-            Console.WriteLine(descript);
-
-            // A list of challenges for the Adventurer to complete
-            // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
-            List<Challenge> challenges = new List<Challenge>()
+            void playThrough(int challengePoints = 0)
             {
-                twoPlusTwo,
-                theAnswer,
-                whatSecond,
-                guessRandom,
-                favoriteBeatle,
-                currentYear,
-                valsVacation
-            };
+                theAdventurer.ChallengesWon = 0;
 
-            // Loop through all the challenges and subject the Adventurer to them
-            // foreach (Challenge challenge in challenges)
-            // {
-            //     challenge.RunChallenge(theAdventurer);
-            // }
-            Random randomIndex = new Random();
-            foreach(int i in Enumerable.Range(0, 5).OrderBy(x => randomIndex.Next()))
-            {
-                challenges[i].RunChallenge(theAdventurer);
+                string descript = theAdventurer.GetDescription();
+                Console.WriteLine(descript);
+
+                int pastPoints = challengePoints * 10;
+                theAdventurer.Awesomeness += pastPoints;
+                // Proves points are being added from previous game's challenges won
+                Console.WriteLine($"{theAdventurer.Name} has {pastPoints} points added from challenges previously won!");
+
+                // A list of challenges for the Adventurer to complete
+                // Note we can use the List class here because have the line "using System.Collections.Generic;" at the top of the file.
+                List<Challenge> challenges = new List<Challenge>()
+                {
+                    twoPlusTwo,
+                    theAnswer,
+                    whatSecond,
+                    guessRandom,
+                    favoriteBeatle,
+                    currentYear,
+                    valsVacation
+                };
+
+                // Loop through all the challenges and subject the Adventurer to them
+                // foreach (Challenge challenge in challenges)
+                // {
+                //     challenge.RunChallenge(theAdventurer);
+                // }
+                Random randomIndex = new Random();
+                foreach(int i in Enumerable.Range(0, 5).OrderBy(x => randomIndex.Next()))
+                {
+                    challenges[i].RunChallenge(theAdventurer);
+                }
+
+                // This code examines how Awesome the Adventurer is after completing the challenges
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
+                {
+                    Console.WriteLine("YOU DID IT! You are truly awesome!");
+                }
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
+                {
+                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                }
+                else
+                {
+                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                }
+
+                Console.Write($"{theAdventurer.Name} has won {theAdventurer.ChallengesWon} challenges!");
+                Console.WriteLine();
+                Console.Write(AdventurePrize.ShowPrize(theAdventurer));
+                Console.WriteLine($"Challenger has {theAdventurer.Awesomeness} awesome points!");
+                Console.WriteLine();
+                playAgain();
             }
 
-            // This code examines how Awesome the Adventurer is after completing the challenges
-            // And praises or humiliates them accordingly
-            if (theAdventurer.Awesomeness >= maxAwesomeness)
+            void playAgain()
             {
-                Console.WriteLine("YOU DID IT! You are truly awesome!");
-            }
-            else if (theAdventurer.Awesomeness <= minAwesomeness)
-            {
-                Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
-            }
-            else
-            {
-                Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                Console.WriteLine("Hey dummy, would you like to play again? (Y/N): ");
+                string againAnswer = Console.ReadLine().ToLower();
+                if(againAnswer == "n") {
+                    return;
+                }
+                else if(againAnswer == "y") {
+                    playThrough(theAdventurer.ChallengesWon);
+                }
+                else {
+                    return;
+                }
             }
 
-            Console.Write(AdventurePrize.ShowPrize(theAdventurer));
+            playThrough();
 
-            Console.WriteLine("Hey dummy, would you like to play again? (Y/N): ");
-            string againAnswer = Console.ReadLine().ToLower();
-            if(againAnswer == "n") {
-                return;
-            }
-            else if(againAnswer == "y") {
-                Main(args);
-            }
-            else {
-                return;
-            }
         }
     }
 }
